@@ -1,10 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:weather_app/model/weather.dart';
-import 'package:weather_app/weatherservice.dart';
+import 'package:weather_app/service/weatherservice.dart';
 
 class WeatherModel with ChangeNotifier {
   List<WeatherViewModel> weather = List<WeatherViewModel>();
-  // WeatherService().fetc;
+  Future<void> fetchWeatherDatas(String cityName) async {
+    final weData = await WeatherService().fetchWeatherData(cityName);
+    this.weather =
+        weData.map((data) => WeatherViewModel(weather: data)).toList();
+    notifyListeners();
+  }
 }
 
 class WeatherViewModel {
@@ -19,7 +24,7 @@ class WeatherViewModel {
     return this.weather.temp;
   }
 
-  double get humidity {
+  int get humidity {
     return this.weather.humidity;
   }
 

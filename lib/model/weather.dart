@@ -1,8 +1,6 @@
-import 'dart:convert';
-
 class Weather {
   final String condition;
-  final double humidity;
+  final int humidity;
   final double pressure;
   final double temp;
 
